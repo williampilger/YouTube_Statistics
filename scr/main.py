@@ -13,7 +13,7 @@ except:
 
 def inicio():
     mp.limpar_terminal()
-    print(' By: will.i.am        ->      GitHub: williampilger\n\n\n  ')
+    print(' By: will.i.am        ->      github.com/williampilger\n\n\n  ')
     inFile = input('Informe o nome do arquivo do qual deseja importar a lista de vídeos: ')
     outFile = inFile+".out.csv"
     sep = '\t'
