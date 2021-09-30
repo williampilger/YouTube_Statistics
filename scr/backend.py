@@ -61,3 +61,13 @@ class appConfig:
 
     def set(self, chave, valor):
         self.params[chave] = valor
+
+#Carregar linhas do arquivo para um array de strings
+def carregaStringArray(filename):
+    with open(filename, 'r') as arquivo:
+        arr = []
+        for linha in arquivo:
+            linha = linha.replace('\n', '')#tirar fim de linha
+            arr.append(linha)
+        return arr
+    return None

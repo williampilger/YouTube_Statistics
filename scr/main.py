@@ -7,6 +7,7 @@ try:
     import backend as be
     import time
     import youtube as yt
+    import json
 except:
     print("Biblioteca necessária não disponível.\n\nEstamos finalizando.")
     quit()
@@ -20,15 +21,25 @@ def inicio():
     if(path.isfile(inFile)):
         conf = be.appConfig('config.ini')
         youtube = yt.YouTube(conf.get('chaveAPI'))
-        with open(inFile, 'r') as arquivo:
-            with open(outFile, 'w') as out:
-                for linha in arquivo:
+        lista = be.carregaStringArray(inFile)
+        count = 1
+        with open(outFile, 'w') as out:
+            out.writelines(f'CONT\tURL\tVisualizações\tLikes\tDeslikes\tComentários\tData\tCanal\tTitulo\tCategoria\n')
+            for linha in lista:
+                try:
                     data = youtube.getVideoData(linha)
-                    
-                    lt = ''
+                    out.writelines(f'{count}')
                     for chave in data:
-                        lt = f'{lt}{sep}{data[chave]}'
-                    out.writelines(f'{lt}\n')
+                        out.writelines(f'\t{data[chave]}')
+                    out.writelines('\n')
+                    print(json.dumps(data, indent=4), '\n')
+                    count += 1
+                except:
+                    pass
+                #lt = ''
+                #for chave in data:
+                #    lt = f'{lt}{sep}{data[chave]}'
+                #out.writelines(f'{lt}\n')
 
 if __name__ == '__main__':
     inicio()
